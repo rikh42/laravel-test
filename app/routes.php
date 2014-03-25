@@ -18,5 +18,12 @@ Route::get('/', function()
 
 Route::get('hello/{name?}', function($name = 'world')
 {
-    return View::make('world', array('name'=>$name));
+    // Create a bear...
+    $bear = new Bear;
+    $bear->name = $name;
+    $bear->votes = 1;
+    $bear->save();
+
+    $all = Bear::all();
+    return View::make('world', array('name'=>$name, 'bears' => $all));
 })->where('name', '[a-zA-Z]+');

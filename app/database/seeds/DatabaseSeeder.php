@@ -12,6 +12,9 @@ class DatabaseSeeder extends Seeder {
 		Eloquent::unguard();
 
 		// $this->call('UserTableSeeder');
+
+        // call our class and run our seeds
+        $this->call('BearTestSeeder');
 	}
 
 }

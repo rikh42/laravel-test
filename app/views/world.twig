@@ -2,4 +2,10 @@
 
 {% block content %}
     <h2>Hello {{ name }}</h2>
+
+    <div>
+        {% for item in bears %}
+            <p>{{ item.name }} has {{ item.votes }} votes.</p>
+        {% endfor %}
+    </div>
 {% endblock %}
