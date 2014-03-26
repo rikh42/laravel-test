@@ -1,0 +1,22 @@
+{% extends 'layouts/master' %}
+
+{% block content %}
+    <h2>Hello {{ name }}
+        {{ trans("reminders.password") }}
+    </h2>
+
+    {{ Form.model(bear) }}
+        {{ Form.label('name')  }}
+        {{ Form.text('name')  }}
+        {{ Form.text('other') }}
+        {{ Form.submit('other') }}
+    {{ Form.close() }}
+
+    {{  dump(errors) }}
+
+    <div>
+        {% for item in bears %}
+            <p>{{ item.name }} has {{ item.votes }} votes.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

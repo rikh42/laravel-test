@@ -27,3 +27,6 @@ Route::get('hello/{name?}', function($name = 'world')
     $all = Bear::all();
     return View::make('world', array('name'=>$name, 'bears' => $all));
 })->where('name', '[a-zA-Z]+');
+
+
+Route::match(array('GET', 'POST'), 'form/example', array('as'=>'testForm', 'uses'=>'Welcome@handleFormAction'));

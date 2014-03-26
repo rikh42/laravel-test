@@ -2,6 +2,33 @@
 
 class Welcome extends \BaseController {
 
+
+    public function handleFormAction()
+    {
+        if (Request::isMethod('post')) {
+            $rules = array(
+                'name' => array('required', 'alpha')
+            );
+
+            $validator = Validator::make(Input::all(), $rules);
+            if ($validator->fails()) {
+                return Redirect::route('testForm')->withErrors($validator);
+            }
+
+            $bear = Bear::find(1);
+            $bear->name = Input::get('name');
+            $bear->votes++;
+            $bear->save();
+
+            return Redirect::route('testForm');
+        }
+
+        // get the data to show the form
+        $all = Bear::all();
+        $edit = Bear::find(1);
+        return View::make('Form', array('name'=>'For example', 'bears' => $all, 'bear'=>$edit));
+    }
+
 	/**
 	 * Display a listing of the resource.
 	 *
