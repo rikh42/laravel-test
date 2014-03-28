@@ -30,3 +30,7 @@ Route::get('hello/{name?}', function($name = 'world')
 
 
 Route::match(array('GET', 'POST'), 'form/example', array('as'=>'testForm', 'uses'=>'Welcome@handleFormAction'));
+
+
+// Bear API
+Route::resource('bears', 'BearController');
