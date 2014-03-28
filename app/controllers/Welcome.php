@@ -1,32 +1,46 @@
 <?php
 
+use Carbon\Carbon;
+
 class Welcome extends \BaseController {
 
 
     public function handleFormAction()
     {
         if (Request::isMethod('post')) {
+
+            // Validation rules
             $rules = array(
                 'name' => array('required', 'alpha')
             );
 
+            // check all the fields are valid
             $validator = Validator::make(Input::all(), $rules);
             if ($validator->fails()) {
-                return Redirect::route('testForm')->withErrors($validator);
+                return Redirect::route('testForm')->withInput()->withErrors($validator);
             }
 
+            // They are, so update the model
             $bear = Bear::find(1);
             $bear->name = Input::get('name');
             $bear->votes++;
             $bear->save();
 
+            // and redirect back
             return Redirect::route('testForm');
         }
 
         // get the data to show the form
         $all = Bear::all();
         $edit = Bear::find(1);
-        return View::make('Form', array('name'=>'For example', 'bears' => $all, 'bear'=>$edit));
+        $opp = Opportunities::find(14);
+        $created = new Carbon($opp->Created);
+        return View::make('Form', array(
+            'name'=>'For example',
+            'bears' => $all,
+            'bear'=>$edit,
+            'Opp'=>$opp,
+            'When'=>$created));
     }
 
 	/**

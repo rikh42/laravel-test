@@ -5,11 +5,28 @@
         {{ trans("reminders.password") }}
     </h2>
 
+    <p>{{ When | date('Y m d') }} :: {{ When.diffForHumans }} :: {{ When.toRFC822String }}</p>
+    <pre>{{ dump(When) }}</pre>
+
+
+
+    {% if Session.has('errors') %}
+    <span class="alert-danger">{{ errors }}</span>
+    {% endif %}
+
     {{ Form.model(bear) }}
-        {{ Form.label('name')  }}
-        {{ Form.text('name')  }}
+    <div class="field{{ errors.has('name')?'error' }}">
+        {% if error.has('name') %}<span>{{ errors.first('name') }}</span>{% endif %}
+        {{ Form.label('name', trans("reminders.password")) }}
+        {{ Form.text('name') }}
+    </div>
+    <div class="field">
+        {{ Form.label('other')  }}
         {{ Form.text('other') }}
+    </div>
+    <div class="field">
         {{ Form.submit('other') }}
+    </div>
     {{ Form.close() }}
 
     {{  dump(errors) }}
