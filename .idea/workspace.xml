@@ -79,7 +79,7 @@
       <file leaf-file-name="routes.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="2" selection-start="396" selection-end="396" vertical-scroll-proportion="-10.0">
+            <state line="13" column="2" selection-start="396" selection-end="396" vertical-scroll-proportion="3.5384614">
               <folding />
             </state>
           </provider>
@@ -112,19 +112,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BearController.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="BearController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/BearController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="47" selection-start="613" selection-end="613" vertical-scroll-proportion="-30.192308">
+            <state line="42" column="47" selection-start="613" selection-end="613" vertical-scroll-proportion="-0.11752137">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Form.twig" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Form.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/Form.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="27" selection-start="325" selection-end="325" vertical-scroll-proportion="0.34188035">
+            <state line="11" column="27" selection-start="325" selection-end="325" vertical-scroll-proportion="-6.1538463">
               <folding />
             </state>
           </provider>
@@ -384,7 +384,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -538,13 +538,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/helpers.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="907" column="0" selection-start="17066" selection-end="17066" vertical-scroll-proportion="-6.576923">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="44" selection-start="258" selection-end="258" vertical-scroll-proportion="11.538462">
@@ -636,16 +629,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.php">
+    <entry file="file://$PROJECT_DIR$/app/views/Form.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="2" selection-start="396" selection-end="396" vertical-scroll-proportion="-10.0">
+        <state line="11" column="27" selection-start="325" selection-end="325" vertical-scroll-proportion="-6.1538463">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/Form.twig">
+    <entry file="file://$PROJECT_DIR$/app/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="27" selection-start="325" selection-end="325" vertical-scroll-proportion="0.34188035">
+        <state line="13" column="2" selection-start="396" selection-end="396" vertical-scroll-proportion="3.5384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/BearController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="47" selection-start="613" selection-end="613" vertical-scroll-proportion="-0.11752137">
           <folding />
         </state>
       </provider>
