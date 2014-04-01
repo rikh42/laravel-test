@@ -2,46 +2,74 @@
 
 use Carbon\Carbon;
 
-class Welcome extends \BaseController {
+interface bearFormListener {
+    public function bearFormFailed($errors);
+    public function bearFormWorked();
+}
 
+class bearFormUpdater {
 
-    public function handleFormAction()
+    // Validation rules
+    protected $rules = ['name' => ['required', 'alpha']];
+
+    public function update(bearFormListener $listener, $bear, $input)
     {
-        if (Request::isMethod('post')) {
-
-            // Validation rules
-            $rules = array(
-                'name' => array('required', 'alpha')
-            );
-
-            // check all the fields are valid
-            $validator = Validator::make(Input::all(), $rules);
-            if ($validator->fails()) {
-                return Redirect::route('testForm')->withInput()->withErrors($validator);
-            }
-
-            // They are, so update the model
-            $bear = Bear::find(1);
-            $bear->name = Input::get('name');
-            $bear->votes++;
-            $bear->save();
-
-            // and redirect back
-            return Redirect::route('testForm');
+        // check all the fields are valid
+        $validator = Validator::make($input, $this->rules);
+        if ($validator->fails()) {
+            return $listener->bearFormFailed($validator->errors());
         }
 
-        // get the data to show the form
-        $all = Bear::all();
-        $edit = Bear::find(1);
-        $opp = Opportunities::find(14);
-        $created = new Carbon($opp->Created);
-        return View::make('Form', array(
-            'name'=>'For example',
-            'bears' => $all,
-            'bear'=>$edit,
-            'Opp'=>$opp,
-            'When'=>$created));
+        // They are, so update the model
+        $bear->name = $input['name'];
+        $bear->votes++;
+        $bear->save();
+        
+        return $listener->bearFormWorked($bear);
     }
+}
+
+
+class Welcome extends \BaseController implements bearFormListener {
+
+    /** @var  bearFormUpdater */
+    protected $formUpdater;
+
+    public function __construct(bearFormUpdater $formUpdater)
+    {
+        $this->formUpdater = $formUpdater;
+    }
+
+    public function edit($id)
+    {
+        // get the data to show on the edit page
+        $viewModel = array(
+            'name'=>'For example',
+            'bears' => Bear::all(),
+            'bear'=>Bear::find($id),
+            'Opp'=>Opportunities::find(14),
+            'When'=>new Carbon('yesterday'));
+
+        // render the template
+        return View::make('Form', $viewModel);
+    }
+
+    public function update($id)
+    {
+        return $this->formUpdater->update($this, Bear::find($id), ['name'=>Input::get('name')]);
+    }
+
+    public function bearFormFailed($errors)
+    {
+        return Redirect::back()->withInput()->withErrors($errors);
+    }
+
+    public function bearFormWorked()
+    {
+        return Redirect::back();
+    }
+
+
 
 	/**
 	 * Display a listing of the resource.
@@ -84,27 +112,6 @@ class Welcome extends \BaseController {
 		//
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
 
 	/**
 	 * Remove the specified resource from storage.

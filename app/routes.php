@@ -29,8 +29,6 @@ Route::get('hello/{name?}', function($name = 'world')
 })->where('name', '[a-zA-Z]+');
 
 
-Route::match(array('GET', 'POST'), 'form/example', array('as'=>'testForm', 'uses'=>'Welcome@handleFormAction'));
+Route::get('bears/{id}', array('as'=>'editBear', 'uses'=>'Welcome@edit'))->where('id', '[0-9]+');
+Route::post('bears/{id}', array('as'=>'updateBear', 'uses'=>'Welcome@update', 'before'=>'csrf'))->where('id', '[0-9]+');
 
-
-// Bear API
-Route::resource('bears', 'BearController');
