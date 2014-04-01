@@ -1,19 +1,24 @@
 {% extends 'layouts/master' %}
 
 {% block content %}
-    <h2>Hello {{ name }}
-        {{ trans("reminders.password") }}
-    </h2>
+    <h2>Testing Twig templates</h2>
+    <p>Name from data array: {{ name }}</p>
+    <p>Environment: {{ App.environment }}</p>
 
-    <p>{{ When | date('Y m d') }} :: {{ When.diffForHumans }} :: {{ When.toRFC822String }}</p>
+    <h2>Translations</h2>
+    <p>reminders.password = {{ trans("reminders.password") }}</p>
+
+    <h2>Carbon Dates</h2>
+    <p>{{ When | date('Y-m-d') }} :: {{ When.diffForHumans }} :: {{ When.toRFC822String }}</p>
     <pre>{{ dump(When) }}</pre>
 
-
-
+    <h2>Forms</h2>
+    <p>Form Errors...</p>
     {% if Session.has('errors') %}
-    <span class="alert-danger">{{ errors }}</span>
+    <p class="alert-danger">{{ errors }}</p>
     {% endif %}
 
+    <p>The form</p>
     {{ Form.model(bear) }}
     <div class="field{{ errors.has('name')?'error' }}">
         {% if error.has('name') %}<span>{{ errors.first('name') }}</span>{% endif %}
@@ -29,8 +34,10 @@
     </div>
     {{ Form.close() }}
 
+    <h2>The Laravel errors value...</h2>
     {{  dump(errors) }}
 
+    <h2>Iterating over the Bears from Eloquent</h2>
     <div>
         {% for item in bears %}
             <p>{{ item.name }} has {{ item.votes }} votes.</p>

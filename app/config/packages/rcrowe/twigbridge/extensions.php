@@ -70,6 +70,7 @@ return array(
         'Session',
         'Str',
         'URL',
+        'App'
     ),
 
     /*
