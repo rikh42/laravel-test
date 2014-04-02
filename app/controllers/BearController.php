@@ -1,6 +1,5 @@
 <?php
 namespace app\controllers;
-use app\controllers\BaseController;
 
 class BearController extends BaseController {
 
