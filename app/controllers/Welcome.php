@@ -26,7 +26,7 @@ class Welcome extends BaseController implements BearFormListener {
 
     /**
      * @param $id
-     * @return mixe
+     * @return mixed
      */
     public function edit($id)
     {
