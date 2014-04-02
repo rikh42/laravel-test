@@ -1,41 +1,23 @@
 <?php
 
+namespace app\controllers;
+use app\controllers\BaseController;
+use app\forms\BearFormListener;
+
+use app\forms\BearFormUpdater;
+use app\models\Bear;
+use app\models\Opportunities;
+use Illuminate\Support\Facades\View;
 use Carbon\Carbon;
 
-interface bearFormListener {
-    public function bearFormFailed($errors);
-    public function bearFormWorked();
-}
-
-class bearFormUpdater {
-
-    // Validation rules
-    protected $rules = ['name' => ['required', 'alpha']];
-
-    public function update(bearFormListener $listener, $bear, $input)
-    {
-        // check all the fields are valid
-        $validator = Validator::make($input, $this->rules);
-        if ($validator->fails()) {
-            return $listener->bearFormFailed($validator->errors());
-        }
-
-        // They are, so update the model
-        $bear->name = $input['name'];
-        $bear->votes++;
-        $bear->save();
-        
-        return $listener->bearFormWorked($bear);
-    }
-}
 
 
-class Welcome extends \BaseController implements bearFormListener {
+class Welcome extends BaseController implements BearFormListener {
 
-    /** @var  bearFormUpdater */
+    /** @var  BearFormUpdater */
     protected $formUpdater;
 
-    public function __construct(bearFormUpdater $formUpdater)
+    public function __construct(BearFormUpdater $formUpdater)
     {
         $this->formUpdater = $formUpdater;
     }
@@ -56,15 +38,16 @@ class Welcome extends \BaseController implements bearFormListener {
 
     public function update($id)
     {
-        return $this->formUpdater->update($this, Bear::find($id), ['name'=>Input::get('name')]);
+        $bear = Bear::find($id);
+        return $this->formUpdater->update($this, $bear, ['name'=>Input::get('name')]);
     }
 
-    public function bearFormFailed($errors)
+    public function BearFormUpdateFailed($errors)
     {
         return Redirect::back()->withInput()->withErrors($errors);
     }
 
-    public function bearFormWorked()
+    public function BearFormUpdateWorked(Bear $bear)
     {
         return Redirect::back();
     }

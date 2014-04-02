@@ -1,6 +1,8 @@
 <?php
+namespace app\controllers;
+use app\controllers\BaseController;
 
-class BearController extends \BaseController {
+class BearController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.

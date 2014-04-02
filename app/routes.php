@@ -29,6 +29,6 @@ Route::get('hello/{name?}', function($name = 'world')
 })->where('name', '[a-zA-Z]+');
 
 
-Route::get('bears/{id}', array('as'=>'editBear', 'uses'=>'Welcome@edit'))->where('id', '[0-9]+');
-Route::post('bears/{id}', array('as'=>'updateBear', 'uses'=>'Welcome@update', 'before'=>'csrf'))->where('id', '[0-9]+');
+Route::get('bears/{id}', array('as'=>'editBear', 'uses'=>'app\controllers\Welcome@edit'))->where('id', '[0-9]+');
+Route::post('bears/{id}', array('as'=>'updateBear', 'uses'=>'app\controllers\Welcome@update', 'before'=>'csrf'))->where('id', '[0-9]+');
 

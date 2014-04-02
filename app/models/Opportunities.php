@@ -1,5 +1,8 @@
 <?php
 
+namespace app\models;
+use Eloquent;
+
 
 class Opportunities extends Eloquent {
 
