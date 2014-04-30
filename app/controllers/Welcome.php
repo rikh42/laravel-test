@@ -2,9 +2,9 @@
 
 namespace app\controllers;
 
-use app\forms\BearFormListener;
-use app\forms\BearFormUpdater;
+use app\forms\FormValidationException;
 use app\models\Bear;
+use app\forms\Bear as BearForm;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
@@ -13,14 +13,14 @@ use Carbon\Carbon;
 
 
 
-class Welcome extends BaseController implements BearFormListener {
+class Welcome extends BaseController {
 
-    /** @var  BearFormUpdater */
-    protected $formUpdater;
 
-    public function __construct(BearFormUpdater $formUpdater)
+    protected $bearForm;
+
+    function __construct(BearForm $bearForm)
     {
-        $this->formUpdater = $formUpdater;
+        $this->bearForm = $bearForm;
     }
 
 
@@ -48,28 +48,22 @@ class Welcome extends BaseController implements BearFormListener {
      */
     public function update($id)
     {
-        $bear = Bear::find($id);
-        return $this->formUpdater->update($this, $bear, ['name'=>Input::get('name')]);
+        try {
+            $this->bearForm->validate(Input::all());
+
+            $bear = Bear::find($id);
+            $bear->name = Input::get('name');
+            $bear->votes++;
+            $bear->save();
+
+            return Redirect::back();
+        }
+        catch (FormValidationException $e) {
+            return Redirect::back()->withInput()->withErrors($e->getErrors());
+        }
+
     }
 
 
-    /**
-     * @param $errors
-     * @return mixed
-     */
-    public function BearFormUpdateFailed($errors)
-    {
-        return Redirect::back()->withInput()->withErrors($errors);
-    }
-
-
-    /**
-     * @param Bear $bear
-     * @return mixed
-     */
-    public function BearFormUpdateWorked(Bear $bear)
-    {
-        return Redirect::back();
-    }
 
 }

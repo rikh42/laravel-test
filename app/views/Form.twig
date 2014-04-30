@@ -20,8 +20,8 @@
 
     <p>The form</p>
     {{ Form.model(bear, {'route':['updateBear', bear.id] }) }}
-    <div class="field{{ errors.has('name')?'error' }}">
-        {% if error.has('name') %}<span>{{ errors.first('name') }}</span>{% endif %}
+    <div class="field{{ errors.has('name')?' error' }}">
+        {% if errors.has('name') %}<span>{{ errors.first('name') }}</span>{% endif %}
         {{ Form.label('name', trans("reminders.password")) }}
         {{ Form.text('name') }}
     </div>
