@@ -27,7 +27,7 @@ abstract class FormValidator {
 
 
     /**
-     * @var
+     * @var \Illuminate\Validation\Validator
      */
     protected $validation;
 
@@ -48,12 +48,15 @@ abstract class FormValidator {
      */
     public function validate(array $formData)
     {
+        // Create the validation object
         $this->validation = $this->validator->make($formData, $this->getValidationRules());
 
+        // If the form data fails to validate, throw an exception
         if ($this->validation->fails()) {
             throw new FormValidationException('Validation Failed', $this->getValidationErrors());
         }
 
+        // All is well. Should this return a bool AND throw exceptions. Pick one.
         return true;
 
     }
@@ -61,7 +64,8 @@ abstract class FormValidator {
 
 
     /**
-     * @return mixed
+     * Gets the MessageBag array with all the validation errors in it.
+     * @return \Illuminate\Support\MessageBag
      */
     protected function getValidationErrors()
     {
@@ -70,6 +74,8 @@ abstract class FormValidator {
 
 
     /**
+     * Up to derived classes to provide an implementation for this. It should return an array of
+     * the validation rules to use for the form.
      * @return mixed
      */
     abstract protected function getValidationRules();

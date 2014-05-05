@@ -12,12 +12,23 @@ use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
 
 
-
+/**
+ * Class Welcome
+ * @package app\controllers
+ */
 class Welcome extends BaseController {
 
 
+    /**
+     * @var \app\forms\Bear
+     */
     protected $bearForm;
 
+
+
+    /**
+     * @param BearForm $bearForm
+     */
     function __construct(BearForm $bearForm)
     {
         $this->bearForm = $bearForm;
