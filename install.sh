@@ -46,16 +46,29 @@ sudo php5enmod -s ALL mcrypt
 echo "--- Enabling mod-rewrite ---"
 sudo a2enmod rewrite
 
-# if the html directory isn't a link, then do something
-if [ ! -L /var/www/html ]; then
-# remove the default folder and replace with a link to the vagrant folder
-# really should do this with a vhost or something
-echo "--- Setting document root ---"
-sudo rm -rf /var/www/html
-sudo ln -fs /vagrant/public /var/www/html
-fi
 
+# Create a new vhost for the project...
+echo "--- Enabling dev.riffal.com vhost ---"
+cat << EOF | sudo tee /etc/apache2/sites-available/dev-site.conf
+<VirtualHost *:80>
+    ServerName dev.riffal.com
+    ServerAdmin webmaster@localhost
+    DocumentRoot /vagrant/public
 
+    ErrorLog \${APACHE_LOG_DIR}/vagrant-error.log
+    CustomLog \${APACHE_LOG_DIR}/vagrant-access.log combined
+
+    <Directory /vagrant>
+        Options Indexes FollowSymLinks Includes ExecCGI
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+</VirtualHost>
+EOF
+
+sudo a2dissite 000-default.conf
+sudo a2ensite dev-site.conf
 
 echo "--- What developer codes without errors turned on? Not you, master. ---"
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/apache2/php.ini
@@ -71,6 +84,6 @@ curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 
 # Laravel stuff here, if you want
-composer -d /vagrant install
+composer install -d /vagrant
 
 echo "--- All set to go! Would you like to play a game? ---"
