@@ -1,6 +1,9 @@
 <?php
 
 
+use app\models\Bear;
+
+
 class BearTestSeeder extends Seeder {
 
     public function run() {
