@@ -23,10 +23,21 @@ sudo apt-get install -y php5 apache2 libapache2-mod-php5 php5-curl php5-gd php5-
 echo "--- Installing and configuring Xdebug ---"
 sudo apt-get install -y php5-xdebug
 
-cat << EOF | sudo tee -a /etc/php5/mods-available/xdebug.ini
-xdebug.scream=1
+cat << EOF | sudo tee /etc/php5/mods-available/xdebug.ini
+zend_extension=xdebug.so
+
 xdebug.cli_color=1
 xdebug.show_local_vars=1
+xdebug.remote_enable=true
+xdebug.remote_connect_back=1
+xdebug.remote_port="9000"
+xdebug.idekey=phpstorm
+xdebug.scream = 0
+
+xdebug.profiler_enable = 0
+xdebug.profiler_enable_trigger = 0
+xdebug.profiler_output_dir = /vagrant/temp
+xdebug.profiler_output_name = cachegrind.out
 EOF
 
 echo "--- Enabling mcrypt in all environments ---"
