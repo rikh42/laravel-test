@@ -1,7 +1,7 @@
 <?php
 
 use app\models\Bear;
-
+use app\models\User;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -15,6 +15,7 @@ use app\models\Bear;
 
 Route::get('/', function()
 {
+    Auth::attempt(array('email' => 'rik@rik.org', 'password' => 'secret'));
 	return View::make('hello');
 });
 
@@ -27,7 +28,7 @@ Route::get('hello/{name?}', function($name = 'world')
     $bear->save();
 
     $all = Bear::all();
-    return View::make('world', array('name'=>$name, 'bears' => $all));
+    return View::make('world', array('name'=>$name, 'bears' => $all, 'user' => Auth::user()));
 })->where('name', '[a-zA-Z]+');
 
 
