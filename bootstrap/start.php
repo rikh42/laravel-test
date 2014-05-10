@@ -23,11 +23,12 @@ $app = new Illuminate\Foundation\Application;
 | given environment, then we will automatically detect it for you.
 |
 */
-
+//dd(gethostname());
 $env = $app->detectEnvironment(array(
 
+    // To find out the cli local hostname, comment out the dd() call above and run php artisan env
 	'local' => array(
-        'laravel.riffal.com',
+        'laravel.riffal.com','localhost','127.0.0.1','vagrant-ubuntu-trusty-64'
         //'precise64'
     ),
 
