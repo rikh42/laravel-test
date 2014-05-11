@@ -4,10 +4,20 @@ namespace app\models;
 use Eloquent;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Zizaco\Entrust\HasRole;
 
+
+/**
+ * Class User
+ * @package app\models
+ */
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
-	/**
+    // Add support for Roles and Permissions to the user
+    use HasRole;
+
+
+    /**
 	 * The database table used by the model.
 	 *
 	 * @var string

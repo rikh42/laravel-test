@@ -5,8 +5,9 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.1.*",
-        "rcrowe/twigbridge": "0.6.*"
-	},
+        "rcrowe/twigbridge": "0.6.*",
+        "zizaco/entrust": "1.1.*"
+    },
     "require-dev": {
         "way/generators": "2.*",
         "barryvdh/laravel-ide-helper": "1.*"
