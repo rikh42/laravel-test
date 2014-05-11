@@ -2,22 +2,27 @@
 
 use app\models\Bear;
 use app\models\User;
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
 
-Route::get('/', function()
+
+// Home
+
+Route::get('/', ['as' => 'home', function()
 {
-    Auth::attempt(array('email' => 'rik@rik.org', 'password' => 'secret'));
-	return View::make('hello');
-});
+	return View::make('home');
+}]);
+
+
+
+// Users
+
+Route::get( '/signin',   ['as'=>'signin.form',   'uses'=>'app\controllers\UserController@signInForm']);
+Route::post('/signin',   ['as'=>'signin',        'uses'=>'app\controllers\UserController@signIn']);
+Route::get( '/signout',  ['as'=>'signout',       'uses'=>'app\controllers\UserController@signOut']);
+
+
+
+
+// Experiments
 
 Route::get('hello/{name?}', function($name = 'world')
 {
