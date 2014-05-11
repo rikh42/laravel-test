@@ -35,10 +35,10 @@ class DatabaseSeeder extends Seeder {
         $deletePerm = Permission::create(['name'=>'jobs.delete', 'display_name'=>'Delete Jobs']);
 
         // assign permissions to roles
-        $adminRole->perms()->sync([$createPerm->id, $deletePerm->id]);
-        $userRole->perms()->sync([$createPerm->id]);
+        $adminRole->attachPermissions([$createPerm, $deletePerm]);
+        $userRole->attachPermissions([$createPerm]);
 
-        // clear our database -
+        // Create a user
         $user = User::create([
             'firstname'=>'Rik',
             'email'=>'rik@rik.org',
