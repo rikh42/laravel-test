@@ -1,13 +1,10 @@
 /bootstrap/compiled.php
 /vendor
 composer.phar
-composer.lock
 .env.local.php
 .env.php
 .DS_Store
 Thumbs.db
-.idea/workspace.xml
-.idea/tasks.xml
 /.idea
 .idea
 /.vagrant
