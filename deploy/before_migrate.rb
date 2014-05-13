@@ -9,7 +9,7 @@ Chef::Log.info("= Shared path is #{shared_path}")
 Chef::Log.info("= Running Composer to install dependencies...")
 execute "composer install" do
 	cwd release_path
-	command "composer install --no-dev --no-interaction"
+	command "composer install --no-dev --no-interaction --optimize-autoloader"
 	action :run
 end
 
