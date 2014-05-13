@@ -8,12 +8,12 @@ Chef::Log.info("= Shared path is #{shared_path}")
 
 
 # Set up the DB config so the app can access it
-Chef::Log.info("= Creating link to Database config file")
-execute "OpsWorks.php Link setup" do
-	cwd release_path
-	command "ln -s #{release_path}/../../shared/opsworks.php #{release_path}/opsworks.php"
-	action :run
-end
+#Chef::Log.info("= Creating link to Database config file")
+#execute "OpsWorks.php Link setup" do
+#	cwd release_path
+#	command "ln -s #{release_path}/../../shared/opsworks.php #{release_path}/opsworks.php"
+#	action :run
+#end
 
 
 # Make some folders writable
