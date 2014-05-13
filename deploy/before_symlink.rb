@@ -17,7 +17,9 @@ Chef::Log.info("= Shared path is #{shared_path}")
 
 
 # Make some folders writable
-
+execute "fixup storage folder" do
+  command "chmod -R 777 #{release_path}/app/storage"
+end
 
 # Run Database Migrations
 Chef::Log.info("= Running artisan DB migration")
