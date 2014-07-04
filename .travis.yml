@@ -3,4 +3,7 @@ php:
   - 5.5
   - 5.4
 install: composer install
+before_script:
+  - "art migrate --env=testing"
+  - "art db:seed --env=testing"
 script: "./vendor/bin/codecept run"
