@@ -1,5 +1,5 @@
 <?php
-$I = new AcceptanceTester($scenario);
-$I->wantTo('ensure that frontpage works');
+$I = new FunctionalTester($scenario);
+$I->wantTo('perform actions and see result');
 $I->amOnPage('/');
 $I->see('Home');
