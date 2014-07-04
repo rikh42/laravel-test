@@ -6,7 +6,7 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => 'localhost',
-            'database'  => 'laravel',
+            'database'  => 'homestead',
             'username'  => 'homestead',
             'password'  => 'secret',
             'charset'   => 'utf8',
