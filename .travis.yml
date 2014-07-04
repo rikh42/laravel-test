@@ -4,6 +4,6 @@ php:
   - 5.4
 install: composer install
 before_script:
-  - "art migrate --env=testing"
-  - "art db:seed --env=testing"
+  - "php artisan migrate --env=testing"
+  - "php artisan db:seed --env=testing"
 script: "./vendor/bin/codecept run"
